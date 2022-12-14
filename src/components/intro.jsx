@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import NewsTiles from "./News";
 import CryptoTiles from "./cryptotiles";
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, incrementByAmount }  from "../features/counterSlice";
+import { refresh , auth }  from "../features/JWTSlice";
 
 class IntroStart extends React.Component{
     render(){
@@ -24,7 +24,7 @@ class IntroStart extends React.Component{
 }
 
 export function Counter() {
-    const count = useSelector((state) => state.counter.value)
+    const count = useSelector((state) => console.log(state))
     const dispatch = useDispatch()
   
     return (
@@ -32,17 +32,18 @@ export function Counter() {
         <div>
           <button
             aria-label="Increment value"
-            onClick={() => dispatch(incrementByAmount(3))}
+            onClick={() => dispatch(auth({email: 'dmt@mail.ru', password: '111'}))}
           >
             Increment
           </button>
-          <span>{count}</span>
+          <span>a</span>
           <button
-            aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
-          >
-            Decrement
+          aria-label="Increment value"
+          onClick={() => dispatch(refresh())}>
+            aaa
+
           </button>
+          
         </div>
       </div>
     )
