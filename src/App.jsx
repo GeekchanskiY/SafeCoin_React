@@ -9,6 +9,7 @@ import Intro from './components/intro';
 import CryptoDetail from './components/cryptodetail';
 import store from './app/store'
 import { Provider } from 'react-redux'
+import Login from './components/login';
 
 
 class Test extends React.Component{
@@ -34,6 +35,7 @@ class App extends React.Component {
                 <Route path='/a' element={<Test1/>}/>
                 <Route path='/list' element={<CryptoList/>}/>
                 <Route path='/crypto/:name' element={<CryptoDetail/>}/>
+                <Route path='/login' element={<Login/>}/>
                 <Route path='*' element={<Error404/>}/>
 
             </Routes>

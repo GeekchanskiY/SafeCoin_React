@@ -23,32 +23,6 @@ class IntroStart extends React.Component{
     }
 }
 
-export function Counter() {
-    const count = useSelector((state) => console.log(state))
-    const dispatch = useDispatch()
-  
-    return (
-      <div>
-        <div>
-          <button
-            aria-label="Increment value"
-            onClick={() => dispatch(auth({email: 'dmt@mail.ru', password: '111'}))}
-          >
-            Increment
-          </button>
-          <span>a</span>
-          <button
-          aria-label="Increment value"
-          onClick={() => dispatch(refresh())}>
-            aaa
-
-          </button>
-          
-        </div>
-      </div>
-    )
-  }
-
 
 class IntroText extends React.Component{
     constructor(props){
@@ -57,7 +31,6 @@ class IntroText extends React.Component{
 
     render(){
         return <div>
-            <Counter></Counter>
             <h3>Quick start in trading</h3>
             <h4>What's cryptocurrency?</h4>
             <p>A cryptocurrency, crypto-currency, or crypto is a digital currency designed to work as a medium of exchange through a computer network that is not reliant on any central authority, such as a government or bank, to uphold or maintain it. It is a decentralized system for verifying that the parties to a transaction have the money they claim to have, eliminating the need for traditional intermediaries, such as banks, when funds are being transferred between two entities.</p>
