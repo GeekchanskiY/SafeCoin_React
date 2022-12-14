@@ -122,3 +122,14 @@ footer .sitemap{
   column-gap: 10px;
   row-gap: 1em;
 }
+.cryptotilesblock{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 1em;
+  margin-bottom: 30px;
+}
+
+.cryptotile{
+  background-color: rgba(255, 255, 255, 0.5);
+}

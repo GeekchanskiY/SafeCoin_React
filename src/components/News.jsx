@@ -42,12 +42,14 @@ export default class NewsTiles extends React.Component{
 
     render(){
         if (this.state.isLoaded){
+            let data = this.state.data.results
+            data = data.slice(0, 4)
             return <div className="newswrapper">
                 <h1>News</h1>
                 <div className="newsblock">
             
             
-            {this.state.data.results.map((el, index) => {
+            {data.map((el, index) => {
                 return <NewsTile title={el.title} img={el.image} newsid={el.id} key={'News'+index}></NewsTile>
             })}
         </div>

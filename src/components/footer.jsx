@@ -16,7 +16,6 @@ export default class Footer extends React.Component{
                 <a href="https://127.0.0.1:8000/admin">Admin page</a>
             </div>
             <span className="sitemap">SiteMap:</span>
-            <span className="footerDimka">Курсовой проект Астровского Дмитрия</span>
         </footer>
     }
 }
