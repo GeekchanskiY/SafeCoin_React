@@ -3,31 +3,42 @@ import { useSelector, useDispatch } from 'react-redux';
 import { refresh , auth }  from "../features/JWTSlice";
 import login_request from "../utils/auth";
 import logo from "../img/SafeCoin 2.png";
+import { useState } from 'react';
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export function LoginForm() {
     const jwt_state = useSelector((state) => state.jwt)
     const dispatch = useDispatch()
-  
-    return (
-      <form>
+    const [login, setLogin] = useState('login')
+    const [password, setPassword] = useState('password')
+    const [error, setError] = useState()
+    const navigate = useNavigate()
+    
+    const try_login = async () => {
+        let data = await login_request(login, password)
+        if (data.error != undefined){
+            setError(data.error.detail)
+        } else {
+            dispatch(auth(data))
+            console.log(data)
+            navigate('/user')
+        }
         
-          <input type="text" name="safecoin_email" id="emailinput" /> <br />
-          <input type="password" name="safecoin_password" id="passwordinput" autoComplete="on"/> <br />
-            
-          <span>{jwt_state.token}</span>
+    }
+    return (
+      <div>
+        
+        <span>{error}</span>
+        <input type="text" name="safecoin_email" id="emailinput" onChange={(e) => {setLogin(e.target.value)}} /> <br />
+        <input type="password" name="safecoin_password" id="passwordinput" autoComplete="on" onChange={(e) => {setPassword(e.target.value)}}/> <br />
           
           
-        <button
-            aria-label="Increment value"
-            onClick={async () => {
-                let data = await login_request("dmt@mail.ru", "111")
-                console.log(data)
-                console.log(jwt_state)
-                dispatch(auth(data))
-            }}>
-                login
-          </button>
-      </form>
+        <button type="submit" onClick={(e) => {try_login()}}>
+                Login
+        </button>
+      </div>
     )
   }
 

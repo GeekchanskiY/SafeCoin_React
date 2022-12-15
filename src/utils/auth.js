@@ -19,7 +19,7 @@ export default async function login_request(login, password){
         output_data = {
             authentificated: true,
             token: data.access,
-            expires_in: new Date(now.getTime() + (20 * 60 * 1000)).toString(),
+            expires_in: new Date(now.getTime() + (5 * 60 * 1000)).toString(),
             refresh: data.refresh
         }
         

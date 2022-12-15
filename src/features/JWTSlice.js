@@ -12,6 +12,7 @@ export const JWTSlice = createSlice({
   initialState,
   reducers: {
     refresh: (state, action) => {
+        console.log(action.payload)
         state.token = action.payload.token
         state.expires_in = action.payload.expires_in
     },
@@ -30,6 +31,6 @@ export const JWTSlice = createSlice({
   },
 })
 
-export const { refresh, auth } = JWTSlice.actions
+export const { refresh, auth, logout } = JWTSlice.actions
 
 export default JWTSlice.reducer
