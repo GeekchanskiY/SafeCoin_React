@@ -6,21 +6,20 @@ import like from '../img/like.png';
 import user from '../img/user.png';
 
 
-export default class Header extends React.Component{
-    render(){
-        return <header>
-            <img src={logo} alt="" id="headerlogo" />
-            <a href=""><img src={user} alt="" /></a>
-            
-            <a href=""><img src={like} alt="" /></a>
+export default function Header () {
+    return <header>
+        <img src={logo} alt="" id="headerlogo" />
+        <a href=""><img src={user} alt="" /></a>
+        
+        <a href=""><img src={like} alt="" /></a>
 
-            <a href=""><img src={trending} alt="" /></a>
-            
-            <form action="">
-                <input type="text" placeholder="SafeCoin"/>
-                <input className="imgbutton" value='' type="submit" style={{backgroundImage: 'url(' + search + ')', backgroundSize: 'cover'}}/>
-            </form>
-            
-        </header>
-    }
+        <a href=""><img src={trending} alt="" /></a>
+        
+        <form action="">
+            <input type="text" placeholder="SafeCoin"/>
+            <input className="imgbutton" value='' type="submit" style={{backgroundImage: 'url(' + search + ')', backgroundSize: 'cover'}}/>
+        </form>
+        
+    </header>
+    
 }

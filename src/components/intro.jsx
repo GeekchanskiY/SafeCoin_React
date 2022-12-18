@@ -51,13 +51,13 @@ class IntroText extends React.Component{
     }
 }
 
-export default class Intro extends React.Component{
-    render(){
-        return <div className="container-xxl">
-            <IntroStart></IntroStart>
-            <CryptoTiles></CryptoTiles>
-            <IntroText></IntroText>
-            <NewsTiles></NewsTiles>
-        </div>
-    }
+export default function Intro (){
+    
+    return <div className="container-xxl">
+        <IntroStart></IntroStart>
+        <CryptoTiles></CryptoTiles>
+        <IntroText></IntroText>
+        <NewsTiles></NewsTiles>
+    </div>
+    
 }
