@@ -1,30 +1,33 @@
-import './App.css';
+// react
+import store from './app/store'
+import { Provider } from 'react-redux'
 import React from 'react';
 import {Routes, Route} from "react-router-dom";
+
+// components
 import Header from './components/main/header';
 import Footer from './components/main/footer';
 import Error404 from './components/main/error404';
 import CryptoList from './components/list';
 import Intro from './components/intro/intro';
 import CryptoDetail from './components/cryptodetail';
-import store from './app/store'
-import { Provider } from 'react-redux'
 import Login from './components/main/login';
 import UserDetail from './components/user_detail';
 import News from './components/news/News';
 import NewsDetail from './components/news/NewsDetail';
 
+// styles
+import './styles/main/app.scss'
+import './styles/main/footer.scss'
+import './styles/main/header.scss'
 
-class Test extends React.Component{
-  render(){
-    return <div>aaa</div>
-  }
-}
-class Test1 extends React.Component{
-  render(){
-    return <div>bbb</div>
-  }
-}
+import './styles/news/news.scss'
+import './styles/news/detail.scss'
+
+import './styles/crypto/detail.scss'
+import './styles/crypto/crypto.scss'
+
+import './styles/intro/intro.scss'
 
 class App extends React.Component {
   render() {
@@ -35,7 +38,6 @@ class App extends React.Component {
           <div className='bodywrapper' >
             <Routes>
                 <Route path='/' element={<Intro/>}/>
-                <Route path='/a' element={<Test1/>}/>
                 <Route path='/list' element={<CryptoList/>}/>
                 <Route path='/crypto/:name' element={<CryptoDetail/>}/>
                 <Route path='/login' element={<Login/>}/>
