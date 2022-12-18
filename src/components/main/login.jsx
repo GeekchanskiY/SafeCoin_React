@@ -42,12 +42,11 @@ export function LoginForm() {
     )
   }
 
-export default class Login extends React.Component{
-    render(){
-        return <div className="LoginForm">
-            <span>Welcome to SafeCoin</span> <img src={logo} alt="logo" />
-            <hr />
-            <LoginForm></LoginForm>
-        </div>
-    }
+export default function Login (){
+    return <div className="LoginForm">
+        <span>Welcome to SafeCoin</span> <img src={logo} alt="logo" />
+        <hr />
+        <LoginForm></LoginForm>
+    </div>
+    
 }
