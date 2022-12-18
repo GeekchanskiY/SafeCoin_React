@@ -10,6 +10,7 @@ export default async function get_news_request(page){
     if (response.status == 200){
         return data
     } else {
+        console.error("NEWS REQUEST ERROR")
         return {"error": "invalid request"}
     }
 }
