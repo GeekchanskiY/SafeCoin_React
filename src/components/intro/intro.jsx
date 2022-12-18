@@ -1,7 +1,7 @@
 import React from "react";
 import introimg1 from "../../img/introimg.png";
 import { Link } from "react-router-dom";
-import CryptoTiles from "../cryptotiles";
+import CryptoTiles from "../crypto/cryptotiles";
 import { useSelector, useDispatch } from 'react-redux';
 import { refresh , auth }  from "../../features/JWTSlice";
 
