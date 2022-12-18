@@ -1,0 +1,41 @@
+footer{
+    height: 120px;
+    width: 100%;
+    border: 1px solid #000;
+    img{
+        height: 60px;
+        width: 60px;
+        margin-left: 5%;
+        margin-top: 30px;
+      }
+      .links{
+        height: 120px;
+        float: right;
+        margin-right: 15%;
+        a{
+            font-size: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            transition: .3s;
+        }
+        a:hover{
+            color: blue;
+        }
+      }
+      .sitemap{
+        float: right;
+        margin-top: 35px;
+        margin-right: 1%;
+        font-size: 2em;
+      }
+  }
+ 
+
+  .footerDimka{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    z-index: -1;
+  }

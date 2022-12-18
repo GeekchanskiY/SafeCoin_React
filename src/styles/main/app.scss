@@ -1,0 +1,16 @@
+body{
+    background-color: #262626;
+    color: #fff;
+  }
+  .imgbutton{
+    height: 45px;
+    width: 45px;
+    margin-top: 7.5px;
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  .bodywrapper{
+    min-height: calc(100vh - 60px - 120px);
+  }
