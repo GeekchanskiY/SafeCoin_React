@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'
 import Login from './components/login';
 import UserDetail from './components/user_detail';
 import News from './components/news/News';
+import NewsDetail from './components/news/NewsDetail';
 
 
 class Test extends React.Component{
@@ -42,6 +43,7 @@ class App extends React.Component {
                 <Route path='/user/:id' element={<UserDetail/>} />
                 <Route path='*' element={<Error404/>}/>
                 <Route path='/news' element={<News/>}/>
+                <Route path='/news/:id' element={<NewsDetail/>}/>
 
             </Routes>
           </div>
