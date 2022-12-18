@@ -3,6 +3,8 @@ import get_news_request from "../../utils/requests/news/get_news_request";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import "../../styles/news/news.scss"
+
 
 function NewsPreview(props){
     useEffect(() =>{
