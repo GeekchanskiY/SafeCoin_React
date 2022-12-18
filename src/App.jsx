@@ -11,6 +11,7 @@ import store from './app/store'
 import { Provider } from 'react-redux'
 import Login from './components/login';
 import UserDetail from './components/user_detail';
+import News from './components/news/News';
 
 
 class Test extends React.Component{
@@ -40,6 +41,7 @@ class App extends React.Component {
                 <Route path='/user' element={<UserDetail/>} />
                 <Route path='/user/:id' element={<UserDetail/>} />
                 <Route path='*' element={<Error404/>}/>
+                <Route path='/news' element={<News/>}/>
 
             </Routes>
           </div>
