@@ -8,11 +8,11 @@ import {Routes, Route} from "react-router-dom";
 import Header from './components/main/header';
 import Footer from './components/main/footer';
 import Error404 from './components/main/error404';
-import CryptoList from './components/list';
+import CryptoList from './components/crypto/list';
 import Intro from './components/intro/intro';
-import CryptoDetail from './components/cryptodetail';
+import CryptoDetail from './components/crypto/cryptodetail';
 import Login from './components/main/login';
-import UserDetail from './components/user_detail';
+import UserDetail from './components/users/user_detail';
 import News from './components/news/News';
 import NewsDetail from './components/news/NewsDetail';
 
