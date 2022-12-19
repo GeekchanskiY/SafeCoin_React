@@ -7,7 +7,7 @@ const initialState = {
   }
 
 export const UserSlice = createSlice({
-  name: 'User',
+  name: 'user',
   initialState,
   reducers: {
     set: (state, action) => {
