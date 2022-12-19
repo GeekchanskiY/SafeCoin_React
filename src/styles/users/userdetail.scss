@@ -13,6 +13,7 @@
         padding-right: 15px;
         padding-bottom: 3px;
     }
+    
     .welcomeback{
         height: 45px;
         width: 100%;
@@ -49,11 +50,19 @@
             display: grid;
             grid-template-columns: 0.5fr 2fr 0.5fr 0.5fr;
             span{
+                margin-top: 10px;
                 font-size: 1.2em;
             }
             input{
                 font-size: 1.2em;
+                
             }
+            input[type=text]{
+                padding-left: 15px;
+            }
+        }
+        .password_error{
+            color: red;
         }
     }
     hr{
@@ -70,5 +79,6 @@
     input{
         margin-top: 10px;
     }
+    
     
 }
