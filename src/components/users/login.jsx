@@ -28,9 +28,9 @@ export function LoginForm() {
         
     }
     return (
-      <div>
-        
-        <span>{error}</span>
+      <div className="detail">
+        <h4>We've been waiting for you</h4>
+        <span className="password_error">{error}</span> <br />
         <input type="text" name="safecoin_email" id="emailinput" onChange={(e) => {setLogin(e.target.value)}} /> <br />
         <input type="password" name="safecoin_password" id="passwordinput" autoComplete="on" onChange={(e) => {setPassword(e.target.value)}}/> <br />
           
@@ -51,8 +51,11 @@ export default function Login (){
       navigate('/user')
     }
   })
-  return <div className="LoginForm">
-      <span>Welcome to SafeCoin</span> <img src={logo} alt="logo" />
+  return <div className="logregform">
+    <div className="welcomeback">
+    <h3 className="left_span">Welcome to SafeCoin</h3> <img src={logo} alt="logo" className="logoimg" />
+    </div>
+      
       <hr />
       <LoginForm></LoginForm>
   </div> 
