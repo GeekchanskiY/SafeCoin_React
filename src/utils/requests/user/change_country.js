@@ -1,9 +1,9 @@
 import { server_url } from "../../../app/constants";
 import store from "../../../app/store";
 
-export default async function login_request(country){
+export default async function change_country_request(country){
     const jwt_state = store.getState().jwt
-    const url = server_url + "/api/user/change_country"
+    const url = server_url + "/api/users/change_country/"
     const requestOptions = {
         method: 'POST',
         headers: { 
