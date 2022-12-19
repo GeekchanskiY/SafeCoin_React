@@ -1,7 +1,9 @@
 import { server_url } from "../../../app/constants";
 import store from "../../../app/store";
+import check_token from "./check_token";
 
 export default async function change_password_request(password){
+    check_token()
     const jwt_state = store.getState().jwt
     const url = server_url + "/api/users/change_password/"
     const requestOptions = {
@@ -24,7 +26,7 @@ export default async function change_password_request(password){
         
     } else {
         console.error("CHANGE PASSWORD REQUEST ERROR")
-        console.error("data")
+        console.error(data)
         return false
     }
 }
