@@ -13,6 +13,7 @@ import logo from "../../img/SafeCoin.png";
 import change_about_me_request from "../../utils/requests/user/change_about_me";
 import change_country_request from "../../utils/requests/user/change_country";
 import change_password_request from "../../utils/requests/user/change_password";
+import change_avatar_request from "../../utils/requests/user/upload_avatar";
 
 export default function UserDetail(){
     const jwt_state = useSelector((state) => state.jwt)
@@ -29,6 +30,8 @@ export default function UserDetail(){
     const [new_password, setNewPassword] = useState("")
 
     const [confirm_password, setConfirmPassword] = useState("")
+
+    const [avatar, setAvatar] = useState()
 
     const navigate = useNavigate()
     
@@ -48,6 +51,10 @@ export default function UserDetail(){
     const change_country = async () => {
         await change_country_request(country)
         set_user_data()
+    }
+
+    const change_avatar = async () => {
+        await change_avatar_request(avatar[0])
     }
 
     const change_password = async () => {
@@ -104,7 +111,8 @@ export default function UserDetail(){
                 <span className="password_error" id="password_error"></span> <br />
                 <input type="password" value={new_password} placeholder="New password" name="new_password" id="new_password" onChange={(e) => {setNewPassword(e.target.value)}}/><br />
                 <input type="password" value={confirm_password} placeholder="Confirm password" name="confirm_password" id="confirm_password" onChange={(e) => setConfirmPassword(e.target.value)}/> <br />
-                <input type="button" value="confirm" onClick={() => {change_password()}}/>
+                <input type="button" value="confirm" onClick={() => {change_password()}}/> <br />
+                <span>Change avatar</span> <br /><input type="file" onChange={(e) => setAvatar(e.target.files)}/><button onClick={(e) => change_avatar()}>Upload</button>
                 <h3>Personal info</h3>
                 <div className="personal">
                 <span>Country:</span>
