@@ -3,7 +3,7 @@ import store from "../../../app/store";
 import check_token from "./check_token";
 
 export default async function change_password_request(password){
-    check_token()
+    await check_token()
     const jwt_state = store.getState().jwt
     const url = server_url + "/api/users/change_password/"
     const requestOptions = {
