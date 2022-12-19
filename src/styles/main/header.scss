@@ -9,6 +9,7 @@ header{
         margin-top: 7.5px;
         margin-left: 10px;
         float: left;
+        cursor: pointer;
     }
 
     form{
@@ -44,6 +45,11 @@ header{
         margin-right: 1%;
         float: right;
         background-color: #212121;
+        img{
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
+        }
     }
     
 }

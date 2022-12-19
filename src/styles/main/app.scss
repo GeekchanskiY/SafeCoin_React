@@ -14,3 +14,18 @@ body{
   .bodywrapper{
     min-height: calc(100vh - 60px - 120px);
   }
+
+input{
+  border: none;
+  outline: none;
+  color: #fff;
+}
+input:focus{
+    border: none;
+    outline: none;
+}
+
+input:focus-visible{
+    border: none;
+    outline: none;
+}

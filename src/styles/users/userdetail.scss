@@ -1,0 +1,74 @@
+.user_detail{
+    margin-top: 5vh;
+    width: 60%;
+    margin-left: 20%;
+    border: 1px solid #000;
+    input{
+        background-color: #3F3F3F;
+        border-radius: 15px;
+
+    }
+    input[type=button]{
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 3px;
+    }
+    .welcomeback{
+        height: 45px;
+        width: 100%;
+        padding-top: 8px;
+
+        .avatarimg{
+            float: left;
+            margin-left: 1%;
+        }
+        .logoimg{
+            float: right;
+            margin-right: 1%;
+        }
+
+        img{
+            
+            width: 45px;
+            height: 45px;
+        }
+        h3{
+            display: inline-block;
+            margin-left: 5%;
+            
+            span{
+                margin-left: 5px;
+                color: lightgreen;
+            }
+        }
+    }
+    .userinfoblock{
+        padding-left: 3%;
+        padding-right: 3%;
+        .personal{
+            display: grid;
+            grid-template-columns: 0.5fr 2fr 0.5fr 0.5fr;
+            span{
+                font-size: 1.2em;
+            }
+            input{
+                font-size: 1.2em;
+            }
+        }
+    }
+    hr{
+        color: #fff;
+    }
+    .email{
+        font-size: large;
+    }
+    .blocklabel{
+        font-size: 1.1em;
+        display: inline-block;
+        margin: 5px;
+    }
+    input{
+        margin-top: 10px;
+    }
+    
+}
