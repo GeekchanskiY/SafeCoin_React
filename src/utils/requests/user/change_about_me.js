@@ -3,7 +3,7 @@ import store from "../../../app/store";
 import check_token from "./check_token";
 
 export default async function change_about_me_request(about_me){
-    check_token()
+    await check_token()
     const jwt_state = store.getState().jwt
     const url = server_url + "/api/users/change_about_me/"
     const requestOptions = {

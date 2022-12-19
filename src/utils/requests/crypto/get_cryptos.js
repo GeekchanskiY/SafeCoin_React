@@ -1,21 +1,19 @@
 import store from "../../../app/store";
 import { set } from "../../../features/userSlice";
 import { server_url } from "../../../app/constants";
-import check_token from "./check_token";
+import check_token from "../user/check_token";
 
-export default async function change_avatar_request(file){
+export default async function crypto_list_request(){
     await check_token()
     const jwt_state = store.getState().jwt
-
     
-    const url = server_url + "/api/users/change_avatar/"
+    const url = server_url + "/api/cryptos/"
     const requestOptions = {
-        method: 'POST',
+        method: 'GET',
         headers: { 
-            'Content-Disposition': 'attachment; filename="'+ file.name +'"',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer '+jwt_state.token
     },
-        body: file
         
     };
 
@@ -23,11 +21,15 @@ export default async function change_avatar_request(file){
     const response = await fetch(url, requestOptions)
     const data = await response.json()
     if (response.ok){
-        console.log("USER AVATAR REQUEST SUCCESS")
-        
+        console.log("USER DATA REQUEST SUCCESS")
+        store.dispatch(set({
+            userid: data.id,
+            username: data.username,
+            img: server_url+data.avatar
+        }))
         return data
     } else {
-        console.error("USER AVATAR REQUEST ERROR")
+        console.error("USER DATA REQUEST ERROR")
         console.error(data)
         return {error: data}   
     }

@@ -4,7 +4,7 @@ import { server_url } from "../../../app/constants";
 import check_token from "./check_token";
 
 export default async function user_data_request(){
-    check_token()
+    await check_token()
     const jwt_state = store.getState().jwt
     
     const url = server_url + "/api/users/me/"
