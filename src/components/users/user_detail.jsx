@@ -10,6 +10,9 @@ import user_data_request from "../../utils/requests/user/user_data";
 import logout_action from "../../utils/actions/user/logout";
 import { server_url } from "../../app/constants";
 import logo from "../../img/SafeCoin.png";
+import change_about_me_request from "../../utils/requests/user/change_about_me";
+import change_country_request from "../../utils/requests/user/change_country";
+import change_password_request from "../../utils/requests/user/change_password";
 
 export default function UserDetail(){
     const jwt_state = useSelector((state) => state.jwt)
@@ -21,6 +24,12 @@ export default function UserDetail(){
     const [about_me, setAboutMe] = useState("")
     const [country, setCountry] = useState("")
 
+    const [old_password, setOldPassword] = useState("")
+
+    const [new_password, setNewPassword] = useState("")
+
+    const [confirm_password, setConfirmPassword] = useState("")
+
     const navigate = useNavigate()
     
     const dispatch = useDispatch()
@@ -31,6 +40,34 @@ export default function UserDetail(){
         setAboutMe(user_data.about_me)
         setCountry(user_data.country)
     }
+
+    const change_about_me = async () => {
+        await change_about_me_request(about_me)
+        set_user_data()
+    }
+    const change_country = async () => {
+        await change_country_request(country)
+        set_user_data()
+    }
+
+    const change_password = async () => {
+        let status_span = document.getElementById("password_error")
+        if (old_password == new_password){
+            status_span.innerText = "Old and new passwords must be different"
+            return
+        }
+        if (new_password != confirm_password){
+            status_span.innerText = "Confirm password does not match"
+            return
+        }
+
+        await change_password_request(new_password)
+        
+        status_span.innerText = "Password changed"
+
+    }
+
+    
 
     useEffect(() => {
         if (jwt_state.authentificated == false){
@@ -63,15 +100,16 @@ export default function UserDetail(){
             <div className="userinfoblock">
                 <span className="email">Your email is: {user.email}</span> <br />
                 <span className="blocklabel">Change Password:</span> <br />
-                <input type="password" placeholder="Old password" name="old_password" id="old_password"/> <br /> <br />
-                <input type="password" placeholder="New password" name="new_password" id="new_password"/><br />
-                <input type="password" placeholder="Confirm password" name="confirm_password" id="confirm_password"/> <br />
-                <input type="button" value="confirm" />
+                <input type="password" value={old_password} placeholder="Old password" name="old_password" id="old_password" onChange={(e) => {setOldPassword(e.target.value)}}/> <br /> 
+                <span className="password_error" id="password_error"></span> <br />
+                <input type="password" value={new_password} placeholder="New password" name="new_password" id="new_password" onChange={(e) => {setNewPassword(e.target.value)}}/><br />
+                <input type="password" value={confirm_password} placeholder="Confirm password" name="confirm_password" id="confirm_password" onChange={(e) => setConfirmPassword(e.target.value)}/> <br />
+                <input type="button" value="confirm" onClick={() => {change_password()}}/>
                 <h3>Personal info</h3>
                 <div className="personal">
                 <span>Country:</span>
-                <input type="text" name="about_me" id="about_me_form" value={country} onChange={(e) => setCountry(e.target.value)}/> <div></div><input type="button" value="Update" /> 
-                <span>About me:</span><input type="text" name="about_me" id="about_me_form" value={about_me} onChange={(e) => setAboutMe(e.target.value)}/> <div></div><input type="button" value="Update" /> 
+                <input type="text" name="about_me" id="about_me_form" value={country} onChange={(e) => setCountry(e.target.value)}/> <div></div><input type="button" value="Update" onClick={(e) => {change_country()}}/> 
+                <span>About me:</span><input type="text" name="about_me" id="about_me_form" value={about_me} onChange={(e) => setAboutMe(e.target.value)}/> <div></div><input type="button" value="Update" onClick={(e) => {change_about_me()}}/> 
                 </div>
                 
             </div>
