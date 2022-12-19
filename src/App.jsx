@@ -11,7 +11,8 @@ import Error404 from './components/main/error404';
 import CryptoList from './components/crypto/list';
 import Intro from './components/intro/intro';
 import CryptoDetail from './components/crypto/cryptodetail';
-import Login from './components/main/login';
+import Login from './components/users/login';
+import Register from './components/users/register';
 import UserDetail from './components/users/user_detail';
 import News from './components/news/News';
 import NewsDetail from './components/news/NewsDetail';
@@ -29,6 +30,9 @@ import './styles/crypto/crypto.scss'
 
 import './styles/intro/intro.scss'
 
+import './styles/users/logregform.scss'
+import './styles/users/userdetail.scss'
+
 class App extends React.Component {
   render() {
     return (
@@ -41,6 +45,7 @@ class App extends React.Component {
                 <Route path='/list' element={<CryptoList/>}/>
                 <Route path='/crypto/:name' element={<CryptoDetail/>}/>
                 <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
                 <Route path='/user' element={<UserDetail/>} />
                 <Route path='/user/:id' element={<UserDetail/>} />
                 <Route path='*' element={<Error404/>}/>
