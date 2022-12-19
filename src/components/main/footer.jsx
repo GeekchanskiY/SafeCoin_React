@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../img/SafeCoin 2.png";
+import logo from "../../img/SafeCoin.png";
 import { Link } from "react-router-dom";
 
 
