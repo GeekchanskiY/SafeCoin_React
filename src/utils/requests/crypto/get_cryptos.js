@@ -30,3 +30,48 @@ export default async function crypto_list_request(page){
         return {error: data}   
     }
 }
+
+export async function get_crypto(name){
+    await check_token()
+    const jwt_state = store.getState().jwt
+    const url = server_url + "/api/cryptos/"+name+"/"
+    const requestOptions = {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+jwt_state.token
+        },  
+    };
+    const response = await fetch(url, requestOptions)
+    const data = await response.json()
+    if (response.ok){
+        console.log("USER DATA REQUEST SUCCESS")
+        return data
+    } else {
+        console.error("USER DATA REQUEST ERROR")
+        console.error(data)
+        return {error: data}   
+    }
+}
+export async function get_crypto_prices(name){
+    await check_token()
+    const jwt_state = store.getState().jwt
+    const url = server_url + "/api/cryptos/"+name+"/price_points/"
+    const requestOptions = {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+jwt_state.token
+        },  
+    };
+    const response = await fetch(url, requestOptions)
+    const data = await response.json()
+    if (response.ok){
+        console.log("USER DATA REQUEST SUCCESS")
+        return data
+    } else {
+        console.error("USER DATA REQUEST ERROR")
+        console.error(data)
+        return {error: data}   
+    }
+}
