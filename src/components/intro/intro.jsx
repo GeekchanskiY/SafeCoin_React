@@ -54,7 +54,7 @@ export default function Intro (){
     
     return <div className="container-xxl">
         <IntroStart></IntroStart>
-        <CryptoTile></CryptoTile>
+       
         <IntroText></IntroText>
     </div>
     
