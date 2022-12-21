@@ -6,6 +6,7 @@ import logo from "../../img/SafeCoin.png";
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { check_login } from "../../utils/actions/user/check_login";
 
 
 export function LoginForm() {
@@ -17,6 +18,13 @@ export function LoginForm() {
     const navigate = useNavigate()
     
     const try_login = async () => {
+      
+        if (check_login()){
+          console.log(jwt_state)
+          navigate("/user")
+        }
+        
+        
         let data = await login_request(login, password)
         if (data.error != undefined){
             setError(data.error.detail)
@@ -27,6 +35,10 @@ export function LoginForm() {
         }
         
     }
+
+    
+    
+
     return (
       <div className="detail">
         <h4>We've been waiting for you</h4>
