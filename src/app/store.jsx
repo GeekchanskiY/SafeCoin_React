@@ -7,7 +7,6 @@ const authMiddleware = (store) => (next) => (action) => {
     const result = next(action);
     if (action.type == "JWT/auth"){
         localStorage.setItem('auth', JSON.stringify(action.payload))
-        console.log('YAY')
     }
     
     return result;
