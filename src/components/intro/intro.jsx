@@ -1,7 +1,7 @@
 import React from "react";
 import introimg1 from "../../img/introimg.png";
 import { Link } from "react-router-dom";
-import CryptoTiles from "../crypto/cryptotiles";
+import CryptoTile from "../crypto/cryptotiles";
 import { useSelector, useDispatch } from 'react-redux';
 import { refresh , auth }  from "../../features/JWTSlice";
 
@@ -54,7 +54,7 @@ export default function Intro (){
     
     return <div className="container-xxl">
         <IntroStart></IntroStart>
-        <CryptoTiles></CryptoTiles>
+        <CryptoTile></CryptoTile>
         <IntroText></IntroText>
     </div>
     
