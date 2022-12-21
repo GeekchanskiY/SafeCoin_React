@@ -3,11 +3,11 @@ import { set } from "../../../features/userSlice";
 import { server_url } from "../../../app/constants";
 import check_token from "../user/check_token";
 
-export default async function crypto_list_request(){
+export default async function crypto_list_request(page){
     await check_token()
     const jwt_state = store.getState().jwt
     
-    const url = server_url + "/api/cryptos/"
+    const url = server_url + "/api/cryptos/?page="+page
     const requestOptions = {
         method: 'GET',
         headers: { 
@@ -22,11 +22,7 @@ export default async function crypto_list_request(){
     const data = await response.json()
     if (response.ok){
         console.log("USER DATA REQUEST SUCCESS")
-        store.dispatch(set({
-            userid: data.id,
-            username: data.username,
-            img: server_url+data.avatar
-        }))
+        
         return data
     } else {
         console.error("USER DATA REQUEST ERROR")
