@@ -32,7 +32,6 @@ export default function News() {
     })
 
     const get_news = async (page) => {
-        console.log(page)
         const data = await get_news_request(page)
         setNews(data.results)
         setHaveNext(data.next == null ? false : true)
