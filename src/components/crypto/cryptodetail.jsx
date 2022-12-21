@@ -1,60 +1,100 @@
-import React from "react";
+import { useState, useEffect } from "react"
+import { get_crypto, get_crypto_prices } from "../../utils/requests/crypto/get_cryptos"
+import { useParams } from "react-router-dom"
 
 
-export default class CryptoDetail extends React.Component{
-
-    constructor(props){
-        //super(props);
-        // useParams не работает потому что пропаганда обоссаных функциональных компонентов
-        // я их не буду использовать ибо считаю не удобными
-        // поэтому тут костыль.
-        // А ещё индекс -1 не работает. JS говно.
-        let coin_name =  window.location.href.split('/').reverse()[0].toLowerCase()
-        super(props)
-        this.state = {
-            isLoaded: false,
-            data: null
-        }
-        let url = "http://127.0.0.1:8000/api/cryptos/" + coin_name + "/"
+export function CryptoCanvas(props){
+    const points = props.points
+    const graph_height = 300
+    const graph_width = 900
+    const drawcanvas = (e) => {
+        let p;
+        let ctx = e.getContext('2d')
+        let min_price = 0, max_price = 0;
+        let prev_price = 0;
+        let prev_x = 0
+        let prev_y = 0
+        let now_x;
+        let now_y;
         
-        fetch(url, this.requestOptions)
-        .then(res => res.json())
-        .then(
-            (result) => {
-            this.setState({
-                isLoaded: true,
-                data: result
-            })
-        },
-            (error) => {
-            this.setState({
-                isLoaded: false,
-                data: null
-            })
+        for (let i = 0; i < points.length; i++ ){
+            p = points[i]
+            
+            if (p["price"] > max_price){
+                max_price = p["price"];
+            }
+            if (p["price"] < min_price){
+                min_price = p["price"]
+            }
         }
-        )
-    }
-
-    render(){
-        let data = this.state.data
-        if (data !== null){
-            return <div>
-                <span>{data.name}</span>
-                <img src={data.image} alt={data.name}/>
-                <p>{data.description}</p>
-                <span>{data.code}</span> <br />
-                <span>{data.current_price}</span> <br />
-                <span>{data.volume}</span> <br />
-                <span>{data.circulating_supply}</span> <br />
-                <span>{data.transactions_count}</span> <br />
-            </div>
-        } else {
-            return <div>
-                Data cant be loaded
-            </div>
-        }
+        let point_len = graph_width / points.length
+        let unit_height = (max_price - min_price) / graph_height
         
+        for (let i = 0; i < points.length; i++){
+            ctx.beginPath()
+            ctx.moveTo(prev_x, prev_y)
+            p = points[i]
+            now_x = i*point_len
+            now_y = (graph_height - p.price/unit_height)
+
+            ctx.lineTo(now_x, now_y)
+            if (now_y < prev_y){
+                ctx.strokeStyle = "green"
+            } else {
+                ctx.strokeStyle = "red"
+            }
+            ctx.stroke()
+            prev_x = now_x
+            prev_y = now_y
+            ctx.closePath()
+        }
         
         
     }
+    useEffect(() => {
+        let graph = document.getElementById("detailcanvas")
+        
+        drawcanvas(graph)
+    })
+
+    if (points.length == 0){
+        return <div> cant load graphic </div>
+    } else {
+        return <canvas width="900px" height="300px" id="detailcanvas"></canvas>
+    }
+}
+
+export default function CryptoDetail (props){
+    const { name } = useParams()
+    const [crypto, setCrypto] = useState(undefined)
+    const [pricePoints, setPricePoints] = useState([])
+    const [pageinit, setPageInit] = useState(true)
+
+    const get_detail = async () => {
+        const data = await get_crypto(name)
+        const pdata = await get_crypto_prices(name)
+        
+        
+        setCrypto(data)
+        setPricePoints(pdata)
+    }
+
+    useEffect(() => {
+        if (pageinit){
+            get_detail()
+            setPageInit(false)
+        }
+        
+    })
+    if (crypto === undefined){
+        return <div>
+            <h1>{name} is loading, please wait...</h1>
+        </div>
+    } else {
+        return <div className="cryptoDetail">
+            {crypto.name}
+            <CryptoCanvas points={pricePoints}></CryptoCanvas>
+        </div>
+    }
+    
 }
