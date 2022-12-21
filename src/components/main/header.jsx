@@ -9,11 +9,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { check_login } from "../../utils/actions/user/check_login";
 
 
 export default function Header () {
     const user_state = useSelector((state) => state.user)
     const navigate = useNavigate()
+    check_login()
     return <header>
         
         <img src={logo} alt="" id="headerlogo" onClick={() => {navigate('/')}}/>
