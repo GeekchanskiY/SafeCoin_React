@@ -95,7 +95,13 @@ export default function CryptoList (){
     return <div>
         <div className="cryptosearch">
             <div className="cryptofilters">
+                <span className="title">Filters</span>
+                <hr />
+                <div className="filteritem">
+                    <span className="textTitle">Name</span>
+                    <input type="text" />
 
+                </div>
             </div>
             <div className="cryptolist">
             {cryptos.map((crypto, index) => {
