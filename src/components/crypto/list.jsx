@@ -7,6 +7,7 @@ import crypto_list_request from "../../utils/requests/crypto/get_cryptos";
 import { CryptoCanvas } from "./cryptodetail";
 import { get_crypto_prices } from "../../utils/requests/crypto/get_cryptos";
 import { Link } from "react-router-dom";
+import { nFormatter } from "../../utils/actions/random/digitFormatter";
 
 // Fun fact -- в девелопменте реакт рендерит все компонеты дважды
 
@@ -44,9 +45,9 @@ export function CryptoListItem (props){
             <h3><Link to={"/crypto/"+props.data.name+"/"}>{props.data.name}</Link></h3>
         </div>
         <div className="dataholder">
-            <span>Marker cap $:</span><span>{props.data.market_cap}</span>
-            <span>24H volume $:</span><span>{props.data.volume}</span>
-            <span>24h transactions:</span><span>{props.data.transactions_count}</span>
+            <span>Marker cap $:</span><span>{nFormatter(props.data.market_cap, 2)}</span>
+            <span>24H volume $:</span><span>{nFormatter(props.data.volume, 2)}</span>
+            <span>24h transactions:</span><span>{nFormatter(props.data.transactions_count, 2)}</span>
         </div>
         <div className="canvasholder">
             {haveCanvas == true ? <CryptoCanvas points={pricePoints} > </CryptoCanvas> : <span>Data unavailable</span>}
