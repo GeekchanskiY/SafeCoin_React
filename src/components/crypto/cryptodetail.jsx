@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 
 export function CryptoCanvas(props){
     let points = props.points
+    console.log(points)
     const graph_height = 295
     const graph_width = 900
     const drawcanvas = (e) => {
@@ -74,7 +75,7 @@ export default function CryptoDetail (props){
     
     const { name } = useParams()
     const [crypto, setCrypto] = useState(undefined)
-    const [pricePoints, setPricePoints] = useState([])
+    const [pricePoints, setPricePoints] = useState(undefined)
     
     const [cpage, setCPage] = useState(1)
 
@@ -88,7 +89,11 @@ export default function CryptoDetail (props){
     const get_detail = async () => {
         const data = await get_crypto(name)
         const pdata = await get_crypto_prices(name, cpage)
-
+        setCrypto(data)
+        if (pdata == null){
+            
+            return
+        }
         let max_price = pdata[0].price;
         let min_price = pdata[0].price;
 
@@ -113,7 +118,7 @@ export default function CryptoDetail (props){
                 min_price = p["price"]
             }
         }
-        setCrypto(data)
+        
         setPricePoints(pdata)
         setMaxPriceP(max_price)
         setMinPriceP(min_price)
@@ -133,8 +138,10 @@ export default function CryptoDetail (props){
     } else {
         return <div className="cryptoDetailBlock">
             <h3>{crypto.name}</h3>
+            {pricePoints != undefined ?
             <div className="CanvasHolder">
-                <CryptoCanvas points={pricePoints}></CryptoCanvas> <br />
+                 <CryptoCanvas points={pricePoints}></CryptoCanvas> 
+                 <br />
                 <span>Price dia: {minprice_period} - {maxprice_period}</span> <br />
                 <span>Time dia: {min_date.toLocaleDateString('en-us', dateoptions)} - {max_date.toLocaleDateString('en-us', dateoptions)}</span> <br />
                 <div className="paginator">
@@ -144,6 +151,7 @@ export default function CryptoDetail (props){
                 </div>
                 
             </div>
+            : <div><span>data is currently unavailable</span></div>}
             
             
         </div>
