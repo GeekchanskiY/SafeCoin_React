@@ -53,16 +53,19 @@ export async function get_crypto(name){
         return {error: data}   
     }
 }
-export async function get_crypto_prices(name){
+export async function get_crypto_prices(name, page){
     await check_token()
     const jwt_state = store.getState().jwt
     const url = server_url + "/api/cryptos/"+name+"/price_points/"
     const requestOptions = {
-        method: 'GET',
+        method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
             'Authorization': 'Bearer '+jwt_state.token
         },  
+        body: JSON.stringify({
+            page: page,
+        })
     };
     const response = await fetch(url, requestOptions)
     const data = await response.json()
