@@ -2,6 +2,7 @@ import store from "../../../app/store";
 import { set } from "../../../features/userSlice";
 import { server_url } from "../../../app/constants";
 import check_token from "./check_token";
+import logout_action from "../../actions/user/logout";
 
 export default async function user_data_request(){
     await check_token()
@@ -31,6 +32,7 @@ export default async function user_data_request(){
     } else {
         console.error("USER DATA REQUEST ERROR")
         console.error(data)
+        logout_action()
         return {error: data}   
     }
 }
