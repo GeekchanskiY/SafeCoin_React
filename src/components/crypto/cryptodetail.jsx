@@ -76,7 +76,7 @@ export default function CryptoDetail (props){
     const [crypto, setCrypto] = useState(undefined)
     const [pricePoints, setPricePoints] = useState([])
     
-    const [cpage, setCPage] = useState(9)
+    const [cpage, setCPage] = useState(1)
 
     const [minprice_period, setMinPriceP] = useState(0)
     const [maxprice_period, setMaxPriceP] = useState(0)
@@ -131,12 +131,17 @@ export default function CryptoDetail (props){
             <h1>{name} is loading, please wait...</h1>
         </div>
     } else {
-        return <div className="cryptoDetail">
+        return <div className="cryptoDetailBlock">
             <h3>{crypto.name}</h3>
             <div className="CanvasHolder">
-                <CryptoCanvas points={pricePoints}></CryptoCanvas>
+                <CryptoCanvas points={pricePoints}></CryptoCanvas> <br />
                 <span>Price dia: {minprice_period} - {maxprice_period}</span> <br />
-                <span>Time dia: {min_date.toLocaleDateString('en-us', dateoptions)} - {max_date.toLocaleDateString('en-us', dateoptions)}</span>
+                <span>Time dia: {min_date.toLocaleDateString('en-us', dateoptions)} - {max_date.toLocaleDateString('en-us', dateoptions)}</span> <br />
+                <div className="paginator">
+                    <button>Prev page</button>
+                    <span>{cpage}</span>
+                    <button>Next page</button>
+                </div>
                 
             </div>
             
