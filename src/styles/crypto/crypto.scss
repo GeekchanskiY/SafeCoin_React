@@ -31,6 +31,35 @@
       border: 1px solid black;
     }
   }
+.cryptoDetailBlock{
+  text-align: center;
+  .CanvasHolder{
+    width: 100%;
+    canvas{
+      width: 60%;
+    }
+    button{
+      color: #fff;
+      background-color: #212121;
+      
+    }
+    .paginator{
+      margin: 5px;
+      span{
+        margin: 5px;
+        padding: 15px;
+        font-size: 1.5em;
+      }
+      button{
+        margin: 5px;
+        padding: 15px;
+        font-size: 1.5em;
+        border-radius: 15px;
+        border: 1px solid white;
+      }
+    }
+  }
+}
 canvas{
   border: 1px solid red;
 }
