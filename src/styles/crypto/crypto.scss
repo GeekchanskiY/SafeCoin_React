@@ -36,6 +36,31 @@
       background-color: #212121;
       border: 1px solid black;
       float: left;
+      text-align: center;
+      .title{
+        text-align: center;
+        font-size: 25px;
+        font-weight: 500;
+      }
+      .filteritem{
+        text-align: left;
+        .textTitle{
+          margin-left: 5%;
+        }
+        input{
+          margin-top: 5px;
+        }
+        input[type=text]{
+          color: #fff;
+          border-radius: 15px;
+          padding-left: 15px;
+          padding-right: 15px;
+          width: 90%;
+          margin-left: 5%;
+          background-color: #3F3F3F;
+        }
+      }
+
     }
     .cryptolist{
       overflow-y: scroll;
