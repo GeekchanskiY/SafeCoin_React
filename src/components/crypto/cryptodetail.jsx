@@ -4,14 +4,16 @@ import { useParams } from "react-router-dom"
 
 
 export function CryptoCanvas(props){
-    const points = props.points
-    const graph_height = 300
+    let points = props.points
+    const graph_height = 295
     const graph_width = 900
     const drawcanvas = (e) => {
         let p;
-        let ctx = e.getContext('2d')
-        let min_price = 0, max_price = 0;
-        let prev_price = 0;
+        let ctx = e.getContext('2d');
+        ctx.lineWidth = 4;
+        ctx.clearRect(0, 0, graph_width, graph_height);
+        let min_price = points[0].price, max_price = points[0].price;
+        let prev_price = points[0].price;
         let prev_x = 0
         let prev_y = 0
         let now_x;
@@ -28,14 +30,16 @@ export function CryptoCanvas(props){
             }
         }
         let point_len = graph_width / points.length
-        let unit_height = (max_price - min_price) / graph_height
+        let unit_height =   (max_price - min_price) / graph_height
+        prev_price = points[0].price
+        prev_y = graph_height - (points[0].price - min_price)/unit_height
         
         for (let i = 0; i < points.length; i++){
             ctx.beginPath()
             ctx.moveTo(prev_x, prev_y)
             p = points[i]
             now_x = i*point_len
-            now_y = (graph_height - p.price/unit_height)
+            now_y = (graph_height - (p.price - min_price)/unit_height)
 
             ctx.lineTo(now_x, now_y)
             if (now_y < prev_y){
@@ -43,6 +47,7 @@ export function CryptoCanvas(props){
             } else {
                 ctx.strokeStyle = "red"
             }
+            ctx.arc(now_x, now_y, 3, 0, 360)
             ctx.stroke()
             prev_x = now_x
             prev_y = now_y
@@ -65,18 +70,53 @@ export function CryptoCanvas(props){
 }
 
 export default function CryptoDetail (props){
+    const [pageinit, setPageInit] = useState(true)
+    
     const { name } = useParams()
     const [crypto, setCrypto] = useState(undefined)
     const [pricePoints, setPricePoints] = useState([])
-    const [pageinit, setPageInit] = useState(true)
+    
+    const [cpage, setCPage] = useState(9)
+
+    const [minprice_period, setMinPriceP] = useState(0)
+    const [maxprice_period, setMaxPriceP] = useState(0)
+
+    const [min_date, setMinDate] = useState(new Date())
+    const [max_date, setMaxDate] = useState(new Date())
+    const dateoptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
     const get_detail = async () => {
         const data = await get_crypto(name)
-        const pdata = await get_crypto_prices(name)
+        const pdata = await get_crypto_prices(name, cpage)
+
+        let max_price = pdata[0].price;
+        let min_price = pdata[0].price;
+
         
-        
+
+        let max_datet = Date.parse(pdata[0].time)
+        let min_datet = Date.parse(pdata[pdata.length - 1].time)
+        let max_date = new Date()
+        let min_date = new Date()
+        max_date.setTime(max_datet)
+        min_date.setTime(min_datet)
+        setMaxDate(max_date)
+        setMinDate(min_date)
+        let p;
+        for (let i = 0; i < pdata.length; i++ ){
+            p = pdata[i]
+            
+            if (p["price"] > max_price){
+                max_price = p["price"];
+            }
+            if (p["price"] < min_price){
+                min_price = p["price"]
+            }
+        }
         setCrypto(data)
         setPricePoints(pdata)
+        setMaxPriceP(max_price)
+        setMinPriceP(min_price)
     }
 
     useEffect(() => {
@@ -92,8 +132,15 @@ export default function CryptoDetail (props){
         </div>
     } else {
         return <div className="cryptoDetail">
-            {crypto.name}
-            <CryptoCanvas points={pricePoints}></CryptoCanvas>
+            <h3>{crypto.name}</h3>
+            <div className="CanvasHolder">
+                <CryptoCanvas points={pricePoints}></CryptoCanvas>
+                <span>Price dia: {minprice_period} - {maxprice_period}</span> <br />
+                <span>Time dia: {min_date.toLocaleDateString('en-us', dateoptions)} - {max_date.toLocaleDateString('en-us', dateoptions)}</span>
+                
+            </div>
+            
+            
         </div>
     }
     
