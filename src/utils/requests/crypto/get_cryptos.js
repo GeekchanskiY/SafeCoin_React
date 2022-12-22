@@ -69,12 +69,9 @@ export async function get_crypto_prices(name, page){
     };
     const response = await fetch(url, requestOptions)
     const data = await response.json()
-    if (response.ok){
-        console.log("USER DATA REQUEST SUCCESS")
+    if (data.error == undefined){
         return data
     } else {
-        console.error("USER DATA REQUEST ERROR")
-        console.error(data)
-        return {error: data}   
+        return null  
     }
 }
