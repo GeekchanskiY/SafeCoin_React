@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom"
 
 export function CryptoCanvas(props){
     let points = props.points
-    console.log(points)
     const graph_height = 295
     const graph_width = 900
     const drawcanvas = (e) => {
