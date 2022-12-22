@@ -31,7 +31,6 @@ export function CryptoListItem (props){
     useEffect(()=>{
         if (pageinit){
             get_detail()
-            console.log(pricePoints)
             setPageInit(false)
             
         }
@@ -63,6 +62,14 @@ export default function CryptoList (){
     const [have_next, setHaveNext] = useState(false)
     const [have_prev, setHavePrev] = useState(false)
 
+    const [min_mkt_cap, setMinCap] = useState(null)
+    const [max_mkt_cap, setMaxCap] = useState(null)
+    
+    const [min_price, setMinPrice] = useState(null)
+    const [max_price, setMaxPrice] = useState(null)
+
+    const [searchname, setSearchName] = useState("")
+
     useEffect(() => {
         if (pageinit){
             get_cryptos(page)
@@ -74,7 +81,7 @@ export default function CryptoList (){
 
     const get_cryptos = async (page) => {
         const data = await crypto_list_request(page)
-        console.log(data)
+        
         setCryptos(data.results)
         setHaveNext(data.next == null ? false : true)
         setHavePrev(data.previous == null ? false : true)
@@ -99,9 +106,20 @@ export default function CryptoList (){
                 <hr />
                 <div className="filteritem">
                     <span className="textTitle">Name</span>
-                    <input type="text" />
+                    <input type="text" value={searchname}/>
 
                 </div>
+                <div className="filteritem">
+                    <span className="textTitle">Market_cap</span><br />
+                    <span className="numd numd1" >From:</span><input value={min_mkt_cap} type="number" placeholder="0,005" className="numd"/> <span>to</span><input value={max_mkt_cap} type="number" />
+
+                </div>
+                <div className="filteritem">
+                    <span className="textTitle">Price</span><br />
+                    <span className="numd numd1">From:</span><input value={min_price} onChange={(e) => {setMinPrice(e.target.value)}} type="number" className="numd"/> <span>to</span><input value={max_price} onChange={(e) => {setMaxPrice(e.target.value)}} type="number" />
+
+                </div>
+                <button>Search</button>
             </div>
             <div className="cryptolist">
             {cryptos.map((crypto, index) => {
