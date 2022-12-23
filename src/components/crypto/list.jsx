@@ -111,7 +111,7 @@ export default function CryptoList (){
                 </div>
                 <div className="filteritem">
                     <span className="textTitle">Market_cap</span><br />
-                    <span className="numd numd1" >From:</span><input value={min_mkt_cap} type="number" placeholder="0,005" className="numd"/> <span>to</span><input value={max_mkt_cap} type="number" />
+                    <span className="numd numd1" >From:</span><input value={min_mkt_cap} onChange={(e) => {setMinCap(e.target.value)}} type="number" placeholder="0,005" className="numd"/> <span>to</span><input value={max_mkt_cap} onChange={(e) => {setMaxCap(e.target.value)}} type="number" />
 
                 </div>
                 <div className="filteritem">
